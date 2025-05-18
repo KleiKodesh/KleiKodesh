@@ -1,0 +1,14 @@
+﻿<customUI xmlns="http://schemas.microsoft.com/office/2009/07/customui">
+	<ribbon>
+		<tabs>
+			<tab idMso="TabHome">
+				<group id="groupKleiKodesh" insertAfterMso="GroupEditing">
+					<menu id="Klei_Kodesh" getLabel="getLabel" getImage="getImage" size="large" itemSize="large">
+						<button id="WebSites" getImage="getImage" getLabel="getLabel" onAction="button_Click"/>
+						<button id="HebrewBooks" getImage="getImage" getLabel="getLabel" onAction="button_Click"/>
+					</menu>
+				</group>
+			</tab>
+		</tabs>
+	</ribbon>
+</customUI>

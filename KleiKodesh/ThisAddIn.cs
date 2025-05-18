@@ -6,13 +6,21 @@ using System.Xml.Linq;
 using Word = Microsoft.Office.Interop.Word;
 using Office = Microsoft.Office.Core;
 using Microsoft.Office.Tools.Word;
+using KleiKodesh.Ribbon;
+using WpfLib.Helpers;
 
 namespace KleiKodesh
 {
     public partial class ThisAddIn
     {
+        protected override Microsoft.Office.Core.IRibbonExtensibility CreateRibbonExtensibilityObject()
+        {
+            return new KleiKodeshRibbon();
+        }
+
         private void ThisAddIn_Startup(object sender, System.EventArgs e)
         {
+            LocaleDictionary.UseOfficeLocale(this.Application, AppDomain.CurrentDomain.BaseDirectory);
         }
 
         private void ThisAddIn_Shutdown(object sender, System.EventArgs e)
