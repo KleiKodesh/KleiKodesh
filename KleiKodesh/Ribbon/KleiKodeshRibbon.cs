@@ -1,8 +1,11 @@
 ﻿using KleiKodesh.Helpers;
 using System;
 using System.IO;
+using System.Net;
 using System.Reflection;
 using System.Runtime.InteropServices;
+using System.Text.Json;
+using WebSitesLib;
 using WpfLib.Helpers;
 using Office = Microsoft.Office.Core;
 
@@ -38,9 +41,9 @@ namespace KleiKodesh.Ribbon
         {
             switch (control.Id)
             {
-                //case "WebSites":
-                //    WpfTaskPane.Create(new WebSitesView(), LocaleDictionary.Translate("WebSites"), 500);
-                //    break;
+                case "WebSites":
+                    WpfTaskPane.Create(new WebSitesView(), LocaleDictionary.Translate("WebSites"), 500);
+                    break;
                 case "HebrewBooks":
                     WpfTaskPane.Create(new HebrewBooksLib.HebrewBooksView(), control.Id, 600);
                     break;
