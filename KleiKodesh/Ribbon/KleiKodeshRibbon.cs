@@ -1,10 +1,12 @@
 ﻿using KleiKodesh.Helpers;
+using Oztarnik.Main;
 using System;
 using System.IO;
 using System.Net;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Text.Json;
+using System.Threading.Tasks;
 using WebSitesLib;
 using WpfLib.Helpers;
 using Office = Microsoft.Office.Core;
@@ -32,20 +34,25 @@ namespace KleiKodesh.Ribbon
         #region Ribbon Callbacks
         //Create callback methods here. For more information about adding callback methods, visit https://go.microsoft.com/fwlink/?LinkID=271226
 
-        public void Ribbon_Load(Office.IRibbonUI ribbonUI)
+        public async void Ribbon_Load(Office.IRibbonUI ribbonUI)
         {
             this.ribbon = ribbonUI;
+            await Task.Delay(500);
+            UpdateHelper.Update("KleiKodesh", "KleiKodesh", "v0");
         }
 
         public void button_Click(Office.IRibbonControl control)
         {
             switch (control.Id)
             {
+                case "Otzarnik":
+                    WpfTaskPane.Create(new OtzarnikView(), LocaleDictionary.Translate(control.Id), 500);
+                    break;
                 case "WebSites":
-                    WpfTaskPane.Create(new WebSitesView(), LocaleDictionary.Translate("WebSites"), 500);
+                    WpfTaskPane.Create(new WebSitesView(), LocaleDictionary.Translate(control.Id), 500);
                     break;
                 case "HebrewBooks":
-                    WpfTaskPane.Create(new HebrewBooksLib.HebrewBooksView(), control.Id, 600);
+                    WpfTaskPane.Create(new HebrewBooksLib.HebrewBooksView(), LocaleDictionary.Translate(control.Id), 600);
                     break;
             }
         }

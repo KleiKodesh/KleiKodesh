@@ -32,11 +32,13 @@
     <DefineConstants>VSTO40;UseOfficeInterop</DefineConstants>
     <ResolveComReferenceSilent>true</ResolveComReferenceSilent>
     <IsWebBootstrapper>False</IsWebBootstrapper>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
     <BootstrapperEnabled>true</BootstrapperEnabled>
     <PublishUrl>publish\ClickOnce\</PublishUrl>
     <InstallUrl />
     <TargetCulture>en</TargetCulture>
-    <ApplicationVersion>1.0.0.6</ApplicationVersion>
+    <ApplicationVersion>1.0.0.8</ApplicationVersion>
     <AutoIncrementApplicationRevision>true</AutoIncrementApplicationRevision>
     <UpdateEnabled>true</UpdateEnabled>
     <UpdateInterval>7</UpdateInterval>
@@ -47,8 +49,6 @@
     <FriendlyName>KleiKodesh</FriendlyName>
     <OfficeApplicationDescription />
     <LoadBehavior>3</LoadBehavior>
-    <NuGetPackageImportStamp>
-    </NuGetPackageImportStamp>
   </PropertyGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.7.2">
@@ -287,6 +287,9 @@
     <Content Include="Resources\WebSites.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\Otzarnik.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -336,6 +339,10 @@
     <ProjectReference Include="..\..\HebrewBooksLib\HebrewBooksLib\HebrewBooksLib.csproj">
       <Project>{20c94936-5bdd-490d-bd60-6e43547cd9ff}</Project>
       <Name>HebrewBooksLib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Oztarnik\Oztarnik\Oztarnik.csproj">
+      <Project>{22d2a417-d4aa-48fb-84ab-7fe847f3aeef}</Project>
+      <Name>Oztarnik</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\WebSitesLib\WebSitesLib\WebSitesLib.csproj">
       <Project>{861b62fc-9107-4e39-925c-794f2438891d}</Project>

@@ -13,7 +13,7 @@ namespace KleiKodesh
 {
     public partial class ThisAddIn
     {
-        protected override Microsoft.Office.Core.IRibbonExtensibility CreateRibbonExtensibilityObject()
+        protected override Office.IRibbonExtensibility CreateRibbonExtensibilityObject()
         {
             return new KleiKodeshRibbon();
         }
