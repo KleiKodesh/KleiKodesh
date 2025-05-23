@@ -20,6 +20,7 @@ namespace KleiKodesh.Ribbon
 
         public KleiKodeshRibbon()
         {
+
         }
 
         #region IRibbonExtensibility Members
@@ -34,11 +35,16 @@ namespace KleiKodesh.Ribbon
         #region Ribbon Callbacks
         //Create callback methods here. For more information about adding callback methods, visit https://go.microsoft.com/fwlink/?LinkID=271226
 
-        public async void Ribbon_Load(Office.IRibbonUI ribbonUI)
+        bool isLoaded;
+        public void Ribbon_Load(Office.IRibbonUI ribbonUI)
         {
             this.ribbon = ribbonUI;
-            await Task.Delay(500);
-            UpdateHelper.Update("KleiKodesh", "KleiKodesh", "v0");
+        }
+
+        void LoadSettings()
+        {
+            LocaleDictionary.UseOfficeLocale(Globals.ThisAddIn.Application, AppDomain.CurrentDomain.BaseDirectory);
+            UpdateHelper.Update("KleiKodesh", "KleiKodesh", "v1");
         }
 
         public void button_Click(Office.IRibbonControl control)
@@ -59,6 +65,11 @@ namespace KleiKodesh.Ribbon
 
         public string getLabel(Office.IRibbonControl control)
         {
+            if (!isLoaded)
+            {
+                LoadSettings();
+                isLoaded = true;
+            }
             string translation = LocaleDictionary.Translate(control.Id);
             return translation;
         }

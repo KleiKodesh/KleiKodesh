@@ -20,7 +20,7 @@ namespace KleiKodesh
 
         private void ThisAddIn_Startup(object sender, System.EventArgs e)
         {
-            LocaleDictionary.UseOfficeLocale(this.Application, AppDomain.CurrentDomain.BaseDirectory);
+            
         }
 
         private void ThisAddIn_Shutdown(object sender, System.EventArgs e)
