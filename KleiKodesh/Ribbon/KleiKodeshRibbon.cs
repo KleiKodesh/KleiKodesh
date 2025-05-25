@@ -2,11 +2,8 @@
 using Oztarnik.Main;
 using System;
 using System.IO;
-using System.Net;
 using System.Reflection;
 using System.Runtime.InteropServices;
-using System.Text.Json;
-using System.Threading.Tasks;
 using WebSitesLib;
 using WpfLib.Helpers;
 using Office = Microsoft.Office.Core;
@@ -52,7 +49,7 @@ namespace KleiKodesh.Ribbon
             switch (control.Id)
             {
                 case "Otzarnik":
-                    WpfTaskPane.Create(new OtzarnikView(), LocaleDictionary.Translate(control.Id), 500);
+                    WpfTaskPane.Create(new OtzarnikView(), LocaleDictionary.Translate(control.Id), 600);
                     break;
                 case "WebSites":
                     WpfTaskPane.Create(new WebSitesView(), LocaleDictionary.Translate(control.Id), 500);
