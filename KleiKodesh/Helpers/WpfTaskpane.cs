@@ -9,17 +9,20 @@ using Microsoft.VisualBasic;
 using Control = System.Windows.Controls.Control;
 using System.Windows.Media;
 using WpfLib.Helpers;
+using System.Windows.Threading;
 
 namespace KleiKodesh.Helpers
 {
     public static class WpfTaskPane
     {
+        public static Dispatcher Dispatcher { get; private set; }
         public static CustomTaskPane Create<T>(T wpfControl, string title, int defaultWidth) where T : UIElement
         {
             try
             {
                 if (!ExistingPane<T>(out var taskpane) && wpfControl is Control control)
                 {
+                    Dispatcher = control.Dispatcher;
                     string type = typeof(T).ToString();
 
                     var host = WpfHost(control);
@@ -107,6 +110,10 @@ namespace KleiKodesh.Helpers
         {
             try
             {
+                Globals.ThisAddIn.officeThemeWatcher.OnThemeChanged();
+            }
+            catch
+            { 
                 var foreColor = sidePanel.ForeColor;
                 var forefixedColor = Color.FromArgb(foreColor.A, foreColor.B, foreColor.G, foreColor.R);
                 ThemeHelper.ForeGround = new SolidColorBrush(Color.FromArgb(forefixedColor.A, forefixedColor.R, forefixedColor.G, forefixedColor.B));
@@ -115,7 +122,6 @@ namespace KleiKodesh.Helpers
                 var backfixedColor = Color.FromArgb(backColor.A, backColor.B, backColor.G, backColor.R);
                 ThemeHelper.BackGround = new SolidColorBrush(Color.FromArgb(backfixedColor.A, backfixedColor.R, backfixedColor.G, backfixedColor.B));
             }
-            catch { }
         }
 
         private static int ConvertToScreenPixels(double wpfUnits)

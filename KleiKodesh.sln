@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebSitesLib", "..\WebSitesL
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Oztarnik", "..\Oztarnik\Oztarnik\Oztarnik.csproj", "{22D2A417-D4AA-48FB-84AB-7FE847F3AEEF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebViewLib", "..\WebViewLib\WebViewLib\WebViewLib.csproj", "{A50D2909-20E5-4142-9392-3546812C916A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{22D2A417-D4AA-48FB-84AB-7FE847F3AEEF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{22D2A417-D4AA-48FB-84AB-7FE847F3AEEF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{22D2A417-D4AA-48FB-84AB-7FE847F3AEEF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A50D2909-20E5-4142-9392-3546812C916A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A50D2909-20E5-4142-9392-3546812C916A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A50D2909-20E5-4142-9392-3546812C916A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A50D2909-20E5-4142-9392-3546812C916A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

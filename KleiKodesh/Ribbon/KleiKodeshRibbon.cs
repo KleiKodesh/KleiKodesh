@@ -41,7 +41,7 @@ namespace KleiKodesh.Ribbon
         void LoadSettings()
         {
             LocaleDictionary.UseOfficeLocale(Globals.ThisAddIn.Application, AppDomain.CurrentDomain.BaseDirectory);
-            UpdateHelper.Update("KleiKodesh", "KleiKodesh", "v1");
+            UpdateHelper.Update("KleiKodesh", "KleiKodesh", "v1.2", "נמצאו עדכונים עבור כלי קודש בוורד, האם ברצונך להורידם כעת?");
         }
 
         public void button_Click(Office.IRibbonControl control)

@@ -166,6 +166,7 @@
     <Reference Include="System.IO.Pipelines, Version=9.0.0.5, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.IO.Pipelines.9.0.5\lib\net462\System.IO.Pipelines.dll</HintPath>
     </Reference>
+    <Reference Include="System.Management" />
     <Reference Include="System.Memory, Version=4.0.1.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Memory.4.5.5\lib\net461\System.Memory.dll</HintPath>
     </Reference>
@@ -276,6 +277,7 @@
     can be found.
   -->
   <ItemGroup>
+    <Compile Include="Helpers\OfficeThemeWatcher.cs" />
     <Compile Include="Helpers\WdWpfWindowHelper.cs" />
     <Compile Include="Helpers\WpfTaskpane.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -347,6 +349,10 @@
     <ProjectReference Include="..\..\WebSitesLib\WebSitesLib\WebSitesLib.csproj">
       <Project>{861b62fc-9107-4e39-925c-794f2438891d}</Project>
       <Name>WebSitesLib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\WebViewLib\WebViewLib\WebViewLib.csproj">
+      <Project>{a50d2909-20e5-4142-9392-3546812c916a}</Project>
+      <Name>WebViewLib</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\WpfLib\WpfLib\WpfLib.csproj">
       <Project>{494b02c1-54f2-4244-9a90-23c9984970e7}</Project>

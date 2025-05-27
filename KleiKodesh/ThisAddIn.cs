@@ -7,12 +7,13 @@ using Word = Microsoft.Office.Interop.Word;
 using Office = Microsoft.Office.Core;
 using Microsoft.Office.Tools.Word;
 using KleiKodesh.Ribbon;
-using WpfLib.Helpers;
+using KleiKodesh.Helpers;
 
 namespace KleiKodesh
 {
     public partial class ThisAddIn
     {
+        public OfficeThemeWatcher officeThemeWatcher = new OfficeThemeWatcher();
         protected override Office.IRibbonExtensibility CreateRibbonExtensibilityObject()
         {
             return new KleiKodeshRibbon();
@@ -25,6 +26,7 @@ namespace KleiKodesh
 
         private void ThisAddIn_Shutdown(object sender, System.EventArgs e)
         {
+            officeThemeWatcher.Stop();
         }
 
         #region VSTO generated code
