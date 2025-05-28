@@ -73,7 +73,7 @@ namespace KleiKodesh.Helpers
         }
         static void SetWidth(CustomTaskPane taskPane, UserControl hostControl, Control control, string type, int defaultWidth)
         {
-            taskPane.Width = int.Parse(Interaction.GetSetting(AppDomain.CurrentDomain.ToString(), type, "TaskPaneWidth", defaultWidth.ToString()));
+            taskPane.Width = int.Parse(Interaction.GetSetting(AppDomain.CurrentDomain.FriendlyName, type, "TaskPaneWidth", defaultWidth.ToString()));
 
             control.Loaded += (s, e) =>
             {
@@ -85,9 +85,9 @@ namespace KleiKodesh.Helpers
                 }
             };
 
-            hostControl.Disposed += (s, e) =>
+            hostControl.SizeChanged += (s, e) =>
             {
-                try {  Interaction.SaveSetting(AppDomain.CurrentDomain.ToString(), type, "TaskPaneWidth", taskPane.Width.ToString()); } catch { }
+                try {  Interaction.SaveSetting(AppDomain.CurrentDomain.FriendlyName, type, "TaskPaneWidth", taskPane.Width.ToString()); } catch { }
             };
                 
         }
@@ -95,7 +95,7 @@ namespace KleiKodesh.Helpers
         static void SetDockPostion(CustomTaskPane taskPane, string type)
         {
             var defaultPos = LocaleDictionary.IsRtl == true ? DockPosition.msoCTPDockPositionRight : DockPosition.msoCTPDockPositionLeft;
-            if (Enum.TryParse(Interaction.GetSetting(AppDomain.CurrentDomain.ToString(), type, "DockPosition" + type + LocaleDictionary.Locale, defaultPos.ToString()),
+            if (Enum.TryParse(Interaction.GetSetting(AppDomain.CurrentDomain.FriendlyName, type, "DockPosition" + type + LocaleDictionary.Locale, defaultPos.ToString()),
                          out DockPosition savedDockPosition))
                 taskPane.DockPosition = savedDockPosition;
             else
@@ -103,7 +103,7 @@ namespace KleiKodesh.Helpers
 
 
             taskPane.DockPositionChanged += (sender, e) =>
-                Interaction.SaveSetting(AppDomain.CurrentDomain.ToString(), type, "DockPosition" + type + LocaleDictionary.Locale, taskPane.DockPosition.ToString());
+                Interaction.SaveSetting(AppDomain.CurrentDomain.FriendlyName, type, "DockPosition" + type + LocaleDictionary.Locale, taskPane.DockPosition.ToString());
         }
 
         static void SetWpfColor(UserControl sidePanel, Control control)
