@@ -168,8 +168,8 @@ namespace KleiKodesh.Helpers
         {
             var theme = GetCurrentTheme();
                WpfTaskPane.Dispatcher?.Invoke(() => {
-                   ThemeHelper.BackGround = new SolidColorBrush(theme.BackgroundColor);
-                   ThemeHelper.ForeGround = new SolidColorBrush(theme.TextColor);
+                   ThemeHelper.Background = new SolidColorBrush(theme.BackgroundColor);
+                   ThemeHelper.Foreground = new SolidColorBrush(theme.TextColor);
                });
         }
 

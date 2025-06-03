@@ -116,11 +116,11 @@ namespace KleiKodesh.Helpers
             { 
                 var foreColor = sidePanel.ForeColor;
                 var forefixedColor = Color.FromArgb(foreColor.A, foreColor.B, foreColor.G, foreColor.R);
-                ThemeHelper.ForeGround = new SolidColorBrush(Color.FromArgb(forefixedColor.A, forefixedColor.R, forefixedColor.G, forefixedColor.B));
+                ThemeHelper.Foreground = new SolidColorBrush(Color.FromArgb(forefixedColor.A, forefixedColor.R, forefixedColor.G, forefixedColor.B));
 
                 var backColor = sidePanel.BackColor;
                 var backfixedColor = Color.FromArgb(backColor.A, backColor.B, backColor.G, backColor.R);
-                ThemeHelper.BackGround = new SolidColorBrush(Color.FromArgb(backfixedColor.A, backfixedColor.R, backfixedColor.G, backfixedColor.B));
+                ThemeHelper.Background = new SolidColorBrush(Color.FromArgb(backfixedColor.A, backfixedColor.R, backfixedColor.G, backfixedColor.B));
             }
         }
 
