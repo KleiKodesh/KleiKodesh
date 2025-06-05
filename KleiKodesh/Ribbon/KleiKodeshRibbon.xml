@@ -1,13 +1,17 @@
-﻿<customUI xmlns="http://schemas.microsoft.com/office/2009/07/customui">
+﻿<customUI xmlns="http://schemas.microsoft.com/office/2009/07/customui" onLoad="Ribbon_Load">
 	<ribbon>
 		<tabs>
 			<tab idMso="TabHome">
-				<group id="groupKleiKodesh" insertAfterMso="GroupEditing">
-					<menu id="Klei_Kodesh" getLabel="getLabel" getImage="getImage" size="large" itemSize="large">
-						<button id="Otzarnik" getImage="getImage" getLabel="getLabel" onAction="button_Click"/>
-						<button id="WebSites" getImage="getImage" getLabel="getLabel" onAction="button_Click"/>
-						<button id="HebrewBooks" getImage="getImage" getLabel="getLabel" onAction="button_Click"/>
-					</menu>
+				<group id="Klei_Kodesh" insertAfterMso="GroupEditing" getLabel="getLabel">
+					<splitButton id="mySplitButton" size="large">
+						<button id="Klei_Kodesh_Main" getLabel="getLabel" getImage="getImage" onAction="button_Click"/>
+						<menu getLabel="getLabel" getImage="getImage" itemSize="large">
+							<button id="Otzarnik" getImage="getImage" getLabel="getLabel" onAction="button_Click" getVisible="getVisible"/>
+							<button id="WebSites" getImage="getImage" getLabel="getLabel" onAction="button_Click" getVisible="getVisible"/>
+							<button id="HebrewBooks" getImage="getImage" getLabel="getLabel" onAction="button_Click" getVisible="getVisible"/>
+							<button id="Settings" imageMso="ComAddInsDialog" getLabel="getLabel" onAction="button_Click"/>
+						</menu>
+					</splitButton>
 				</group>
 			</tab>
 		</tabs>

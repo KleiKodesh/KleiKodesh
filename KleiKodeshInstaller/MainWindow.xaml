@@ -11,7 +11,9 @@
         SizeToContent="WidthAndHeight"
         FlowDirection="RightToLeft"
         WindowStartupLocation="CenterScreen" 
-        Background="#FFF4F6F8">
+        Background="#FFF4F6F8"
+        FontSize="14"
+        FontFamily="Tahoma">
     
     <Window.Resources>
         <Style TargetType="Button">
@@ -28,6 +30,11 @@
     </Window.Resources>
 
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
         <StackPanel>
 
             <Border Background="White" 
@@ -83,12 +90,77 @@
 
         </StackPanel>
 
-        <TextBlock VerticalAlignment="Bottom" 
+
+        <StackPanel Grid.Row="1"
+                    HorizontalAlignment="Center"
+                    Margin="10">
+            <StackPanel.Resources>
+                <Style TargetType="CheckBox">
+                    <Setter Property="Margin" Value="0,5"/>
+                    <Setter Property="VerticalContentAlignment" Value="Center"/>
+                </Style>
+                <Style TargetType="RadioButton">
+                    <Setter Property="Margin" Value="0,5"/>
+                    <Setter Property="VerticalContentAlignment" Value="Center"/>
+                </Style>
+                <Style TargetType="Image">
+                    <Setter Property="Height" Value="15"/>
+                    <Setter Property="RenderOptions.BitmapScalingMode" Value="HighQuality"/>
+                    <Setter Property="FlowDirection" Value="LeftToRight"/>
+                </Style>
+            </StackPanel.Resources>
+
+            <StackPanel Orientation="Horizontal">
+                <StackPanel Margin="10,5">
+                    <TextBlock Text="רכיבים פעילים:" 
+                               FontSize="12"
+                               Margin="0,5"
+                               Opacity="0.8"/>
+
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="/Otzarnik.png"/>
+                        <CheckBox Content="אוצרניק" 
+                      IsChecked="{Binding Path=IsVisible, Source={x:Static local:SettingsViewModel.ShowOtzarnik}}"/>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="/WebSites.png"/>
+                        <CheckBox Content="דרך האתרים"
+                       IsChecked="{Binding Path=IsVisible, Source={x:Static local:SettingsViewModel.ShowWebSites}}"/>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="/HebrewBooks.png"/>
+                        <CheckBox Content="היברו בוקס"
+                      IsChecked="{Binding Path=IsVisible, Source={x:Static local:SettingsViewModel.ShowHebrewBooks}}"/>
+                    </StackPanel>
+                </StackPanel>
+
+                <StackPanel Margin="10,5">
+                    <TextBlock Text="לחצן ברירת המחדל:" 
+                               FontSize="12"
+                               Margin="0,5"
+                               Opacity="0.8"/>
+                    
+                    <RadioButton GroupName="DefaultButton" Content="אוצרניק"
+                              IsEnabled="{Binding Path=IsVisible, Source={x:Static local:SettingsViewModel.ShowOtzarnik}}"
+                              IsChecked="{Binding Path=IsDefault, Source={x:Static local:SettingsViewModel.ShowOtzarnik}}"/>
+                    <RadioButton GroupName="DefaultButton" Content="דרך האתרים"
+                              IsEnabled="{Binding Path=IsVisible, Source={x:Static local:SettingsViewModel.ShowWebSites}}"
+                              IsChecked="{Binding Path=IsDefault, Source={x:Static local:SettingsViewModel.ShowWebSites}}"/>
+                    <RadioButton GroupName="DefaultButton" Content="היברו בוקס"
+                              IsEnabled="{Binding Path=IsVisible, Source={x:Static local:SettingsViewModel.ShowWebSites}}"
+                              IsChecked="{Binding Path=IsDefault, Source={x:Static local:SettingsViewModel.ShowHebrewBooks}}"/>
+                </StackPanel>
+            </StackPanel>
+        </StackPanel>
+
+            <TextBlock Grid.Row="2"
                    HorizontalAlignment="Center"
                    Margin="3">
-    <Hyperlink NavigateUri="https://kleikodesh.github.io/" RequestNavigate="Hyperlink_RequestNavigate">
-        kleikodesh.github.io ©
-    </Hyperlink>
+                <Hyperlink NavigateUri="https://kleikodesh.github.io/" RequestNavigate="Hyperlink_RequestNavigate">
+                    kleikodesh.github.io ©
+                </Hyperlink>
         </TextBlock>
     </Grid>
 </Window>

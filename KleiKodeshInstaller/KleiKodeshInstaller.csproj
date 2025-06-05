@@ -41,6 +41,7 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.IO.Compression" />
@@ -62,6 +63,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="SettingsViewModel.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -118,11 +120,9 @@
   <ItemGroup>
     <Resource Include="Klei_Kodesh.ico" />
   </ItemGroup>
-  <Target Name="KleiKodeshUninstaller" BeforeTargets="BeforeBuild">
-    <PropertyGroup>
-      <ExternalRelease>C:\Users\Admin\source\repos\KleiKodesh\KleiKodeshUninstaller\bin\Release\KleiKodeshUninstaller.exe</ExternalRelease>
-      <OutputExe>Uninstaller.exe</OutputExe>
-    </PropertyGroup>
-    <Copy SourceFiles="$(ExternalRelease)" DestinationFiles="$(OutputExe)" />
-  </Target>
+  <ItemGroup>
+    <Resource Include="HebrewBooks.png" />
+    <Resource Include="Otzarnik.png" />
+    <Resource Include="WebSites.png" />
+  </ItemGroup>
 </Project>

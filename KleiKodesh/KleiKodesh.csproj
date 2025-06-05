@@ -282,6 +282,7 @@
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Content Include="Klei_Kodesh.ico" />
     <Content Include="Resources\Klei_Kodesh.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -322,6 +323,10 @@
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
     <Compile Include="Ribbon\KleiKodeshRibbon.cs" />
+    <Compile Include="Ribbon\SettingsView.xaml.cs">
+      <DependentUpon>SettingsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Ribbon\SettingsViewModel.cs" />
     <Compile Include="ThisAddIn.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -358,7 +363,12 @@
       <Name>WpfLib</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Page Include="Ribbon\SettingsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
   <ItemGroup>
     <Content Include="Resources\HebrewBooks.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -376,6 +386,9 @@
   </PropertyGroup>
   <PropertyGroup>
     <ManifestCertificateThumbprint>528C15CBAAB7D25EA6E4B210048C21782891D646</ManifestCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Klei_Kodesh.ico</ApplicationIcon>
   </PropertyGroup>
   <!-- Include the build rules for a C# project. -->
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

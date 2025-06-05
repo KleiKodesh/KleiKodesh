@@ -1,6 +1,8 @@
 ﻿using KleiKodesh.Helpers;
+using Microsoft.Office.Core;
 using Oztarnik.Main;
 using System;
+using System.Diagnostics;
 using System.IO;
 using System.Reflection;
 using System.Runtime.InteropServices;
@@ -13,7 +15,7 @@ namespace KleiKodesh.Ribbon
     [ComVisible(true)]
     public class KleiKodeshRibbon : Office.IRibbonExtensibility
     {
-        private Office.IRibbonUI ribbon;
+        private IRibbonUI ribbon;
 
         public KleiKodeshRibbon()
         {
@@ -33,30 +35,42 @@ namespace KleiKodesh.Ribbon
         //Create callback methods here. For more information about adding callback methods, visit https://go.microsoft.com/fwlink/?LinkID=271226
 
         bool isLoaded;
-        public void Ribbon_Load(Office.IRibbonUI ribbonUI)
+        public void Ribbon_Load(IRibbonUI ribbonUI)
         {
             this.ribbon = ribbonUI;
+            SettingsViewModel.Ribbon = ribbonUI;
         }
 
         void LoadSettings()
         {
             LocaleDictionary.UseOfficeLocale(Globals.ThisAddIn.Application, AppDomain.CurrentDomain.BaseDirectory);
-            UpdateHelper.Update("KleiKodesh", "KleiKodesh", "v1.5", "נמצאו עדכונים עבור כלי קודש בוורד, האם ברצונך להורידם כעת?");
+            UpdateHelper.Update("KleiKodesh", "KleiKodesh", "v1.6", SettingsViewModel.UpdateInterval, "נמצאו עדכונים עבור כלי קודש בוורד, האם ברצונך להורידם כעת?");
             Otzarnik.Helpers.WdWpfWindowHelper.Application = Globals.ThisAddIn.Application;
         }
 
         public void button_Click(Office.IRibbonControl control)
         {
-            switch (control.Id)
+            if (control.Id == "Klei_Kodesh_Main")
+                Execute(SettingsViewModel.GetDefaultSettingKey());
+            else
+                Execute(control.Id);
+        }
+
+        void Execute(string id)
+        {
+            switch (id)
             {
                 case "Otzarnik":
-                    WpfTaskPane.Create(new OtzarnikView(), LocaleDictionary.Translate(control.Id), 600);
+                    WpfTaskPane.Create(new OtzarnikView(), LocaleDictionary.Translate(id), 600);
                     break;
                 case "WebSites":
-                    WpfTaskPane.Create(new WebSitesView(), LocaleDictionary.Translate(control.Id), 500);
+                    WpfTaskPane.Create(new WebSitesView(), LocaleDictionary.Translate(id), 500);
                     break;
                 case "HebrewBooks":
-                    WpfTaskPane.Create(new HebrewBooksLib.HebrewBooksView(), LocaleDictionary.Translate(control.Id), 600);
+                    WpfTaskPane.Create(new HebrewBooksLib.HebrewBooksView(), LocaleDictionary.Translate(id), 600);
+                    break;
+                case "Settings":
+                    WpfTaskPane.Create(new SettingsView(), LocaleDictionary.Translate(id), 600);
                     break;
             }
         }
@@ -68,7 +82,7 @@ namespace KleiKodesh.Ribbon
                 LoadSettings();
                 isLoaded = true;
             }
-            string translation = LocaleDictionary.Translate(control.Id);
+            string translation = LocaleDictionary.Translate(control.Id.Replace("_Main", ""));
             return translation;
         }
 
@@ -76,7 +90,7 @@ namespace KleiKodesh.Ribbon
         {
             try
             {
-                string path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Resources", control.Id + ".png");
+                string path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Resources", control.Id.Replace("_Main", "") + ".png");
                 System.Drawing.Bitmap image = new System.Drawing.Bitmap(path);
                 return image;
             }
@@ -84,6 +98,18 @@ namespace KleiKodesh.Ribbon
             {
                 return null;
             }
+        }
+
+        public bool getVisible(Office.IRibbonControl control)
+        {
+            var property = typeof(SettingsViewModel).GetProperty($"Show{control.Id}");
+            if (property == null)
+                return true;
+
+            var value = property.GetValue(null); // assuming static property
+            var isVisibleProp = value?.GetType().GetProperty("IsVisible");
+
+            return (bool?)isVisibleProp?.GetValue(value) ?? true;
         }
 
         #endregion
