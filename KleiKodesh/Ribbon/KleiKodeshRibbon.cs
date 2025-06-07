@@ -44,7 +44,7 @@ namespace KleiKodesh.Ribbon
         void LoadSettings()
         {
             LocaleDictionary.UseOfficeLocale(Globals.ThisAddIn.Application, AppDomain.CurrentDomain.BaseDirectory);
-            UpdateHelper.Update("KleiKodesh", "KleiKodesh", "v1.6", SettingsViewModel.UpdateInterval, "נמצאו עדכונים עבור כלי קודש בוורד, האם ברצונך להורידם כעת?");
+            UpdateHelper.Update("KleiKodesh", "KleiKodesh", "v1.6.2", SettingsViewModel.UpdateInterval, "נמצאו עדכונים עבור כלי קודש בוורד, האם ברצונך להורידם כעת?");
             Otzarnik.Helpers.WdWpfWindowHelper.Application = Globals.ThisAddIn.Application;
         }
 
