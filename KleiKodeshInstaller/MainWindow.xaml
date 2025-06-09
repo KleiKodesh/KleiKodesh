@@ -65,26 +65,40 @@
                     <UniformGrid Rows="1" 
                              HorizontalAlignment="Center">
                         <Button x:Name="InstallButton"
-                             Grid.Row="3"
                              Padding="20,5"
                              Content="התקן כעת"
                              Click="InstallButton_Click"
                              Margin="10"/>
                         <Button x:Name="UnInstallButton"
-                              Grid.Row="3"
                               Padding="20,5"
                               Content="הסר התקנה"
                               Click="UnInstallButton_Click"
                               Margin="10"/>
                     </UniformGrid>
 
-                    <ProgressBar x:Name="Progress"
+                    <Grid>
+                        <ProgressBar x:Name="Progress"
                           Height="20"
                           Minimum="0"
                           Maximum="100"
                           Value="0"
                           Background="Transparent"
-                          BorderThickness="0"/>     
+                          BorderThickness="0"/>
+
+                        <TextBlock Text="{Binding ElementName=Progress, Path=Value, StringFormat={}%{0:0}}" 
+                                   HorizontalAlignment="Center" VerticalAlignment="Center"
+                                   Opacity="0.5">
+                            <TextBlock.Resources>
+                                <Style TargetType="TextBlock">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Path=Value, ElementName=Progress}" Value="0">
+                                            <Setter Property="Visibility" Value="Collapsed"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Resources>
+                        </TextBlock>
+                    </Grid>
                 </StackPanel>
             </Border>
 

@@ -1,10 +1,13 @@
 ﻿using Microsoft.Win32;
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.IO.Compression;
+using System.Linq;
 using System.Reflection;
 using System.Runtime.InteropServices;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Navigation;
@@ -32,10 +35,19 @@ namespace KleiKodeshInstaller
 
         const int MOVEFILE_DELAY_UNTIL_REBOOT = 0x00000004;
 
+        private bool IsWordRunning() =>
+                Process.GetProcessesByName("WINWORD").Length > 0;
+
+
         public MainWindow()
         {
             InitializeComponent();
             this.Title = this.Title + " " + Version;
+            if (IsWordRunning())
+            {
+                MessageBox.Show("אנא סגור את וורד - ופתח את תוכנת ההתקנה שוב");
+                Close();
+            }
         }
 
         private void InstallButton_Click(object sender, RoutedEventArgs e) => Install();
@@ -164,23 +176,7 @@ namespace KleiKodeshInstaller
 
             try
             {
-                foreach (RegistryView view in new[] { RegistryView.Registry64, RegistryView.Registry32 })
-                {
-                    using (RegistryKey baseKey = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, view))
-                    {
-                        try { baseKey.DeleteSubKeyTree(UninstallRegistryPath, false); } catch { }
-                        try { baseKey.DeleteSubKeyTree(AddinRegistryPath, false); } catch { }
-                    }
-                }
-
-                try
-                {
-                    using (RegistryKey currentUser = RegistryKey.OpenBaseKey(RegistryHive.CurrentUser, RegistryView.Default))
-                    {
-                        currentUser.DeleteSubKeyTree(AddinRegistryPath, false);
-                    }
-                }
-                catch { }
+                RemoveRegistryValues();
 
                 string cmd = $"/C timeout /t 2 & rmdir /s /q \"{installPath}\"";
                 var psi = new ProcessStartInfo("cmd.exe", cmd)
@@ -193,9 +189,7 @@ namespace KleiKodeshInstaller
                 proc.WaitForExit(5000);
 
                 if (Directory.Exists(installPath))
-                {
                     MoveFileEx(installPath, null, MOVEFILE_DELAY_UNTIL_REBOOT);
-                }
 
                 Close();
                 MessageBox.Show("ההתקנה הוסרה");
@@ -204,6 +198,27 @@ namespace KleiKodeshInstaller
             {
                 MessageBox.Show("Uninstall failed: " + ex.Message);
             }
+        }
+
+        void RemoveRegistryValues()
+        {
+            foreach (RegistryView view in new[] { RegistryView.Registry64, RegistryView.Registry32 })
+            {
+                using (RegistryKey baseKey = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, view))
+                {
+                    try { baseKey.DeleteSubKeyTree(UninstallRegistryPath, false); } catch { }
+                    try { baseKey.DeleteSubKeyTree(AddinRegistryPath, false); } catch { }
+                }
+            }
+
+            try
+            {
+                using (RegistryKey currentUser = RegistryKey.OpenBaseKey(RegistryHive.CurrentUser, RegistryView.Default))
+                {
+                    currentUser.DeleteSubKeyTree(AddinRegistryPath, false);
+                }
+            }
+            catch { }
         }
     }
 }
