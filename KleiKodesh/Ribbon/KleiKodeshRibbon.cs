@@ -6,6 +6,8 @@ using System.Diagnostics;
 using System.IO;
 using System.Reflection;
 using System.Runtime.InteropServices;
+using System.Windows;
+using System.Windows.Controls;
 using WebSitesLib;
 using WpfLib.Helpers;
 using Office = Microsoft.Office.Core;
@@ -44,7 +46,7 @@ namespace KleiKodesh.Ribbon
         void LoadSettings()
         {
             LocaleDictionary.UseOfficeLocale(Globals.ThisAddIn.Application, AppDomain.CurrentDomain.BaseDirectory);
-            UpdateHelper.Update("KleiKodesh", "KleiKodesh", "v1.6.2", SettingsViewModel.UpdateInterval, "נמצאו עדכונים עבור כלי קודש בוורד, האם ברצונך להורידם כעת?");
+            UpdateHelper.Update("KleiKodesh", "KleiKodesh", "v1.6.4", SettingsViewModel.UpdateInterval, "נמצאו עדכונים עבור כלי קודש בוורד, האם ברצונך להורידם כעת?");
             Oztarnik.Helpers.WdWpfWindowHelper.Application = Globals.ThisAddIn.Application;
         }
 
@@ -62,6 +64,7 @@ namespace KleiKodesh.Ribbon
             {
                 case "Otzarnik":
                     WpfTaskPane.Create(new OtzarnikView(), LocaleDictionary.Translate(id), 600);
+                    //WpfTaskPane.Create(new OtzarnikLib.UI.MainView(), LocaleDictionary.Translate(id), 600);
                     break;
                 case "WebSites":
                     WpfTaskPane.Create(new WebSitesView(), LocaleDictionary.Translate(id), 500);
