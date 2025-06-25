@@ -2,12 +2,9 @@
 using Microsoft.Office.Core;
 using Oztarnik.Main;
 using System;
-using System.Diagnostics;
 using System.IO;
 using System.Reflection;
 using System.Runtime.InteropServices;
-using System.Windows;
-using System.Windows.Controls;
 using WebSitesLib;
 using WpfLib.Helpers;
 using Office = Microsoft.Office.Core;
@@ -40,20 +37,22 @@ namespace KleiKodesh.Ribbon
         public void Ribbon_Load(IRibbonUI ribbonUI)
         {
             this.ribbon = ribbonUI;
-            SettingsViewModel.Ribbon = ribbonUI;
+            RibbbonSettingsViewModelHost.Ribbon = ribbonUI;
         }
 
         void LoadSettings()
         {
             LocaleDictionary.UseOfficeLocale(Globals.ThisAddIn.Application, AppDomain.CurrentDomain.BaseDirectory);
-            UpdateHelper.Update("KleiKodesh", "KleiKodesh", "v1.6.4", SettingsViewModel.UpdateInterval, "נמצאו עדכונים עבור כלי קודש בוורד, האם ברצונך להורידם כעת?");
+            UpdateHelper.Update("KleiKodesh", "KleiKodesh", "v1.7.2", 1, "נמצאו עדכונים עבור כלי קודש בוורד, האם ברצונך להורידם כעת?");
             Oztarnik.Helpers.WdWpfWindowHelper.Application = Globals.ThisAddIn.Application;
+            var taskPane = WpfTaskPane.Show(new SettingsView(), " ", 600, false);
         }
+
 
         public void button_Click(Office.IRibbonControl control)
         {
             if (control.Id == "Klei_Kodesh_Main")
-                Execute(SettingsViewModel.GetDefaultSettingKey());
+                Execute(RibbbonSettingsViewModelHost.RibbbonSettings.GetDefaultSettingKey());
             else
                 Execute(control.Id);
         }
@@ -63,17 +62,20 @@ namespace KleiKodesh.Ribbon
             switch (id)
             {
                 case "Otzarnik":
-                    WpfTaskPane.Create(new OtzarnikView(), LocaleDictionary.Translate(id), 600);
+                    WpfTaskPane.Show(new OtzarnikView(), LocaleDictionary.Translate(id), 600);
                     //WpfTaskPane.Create(new OtzarnikLib.UI.MainView(), LocaleDictionary.Translate(id), 600);
                     break;
                 case "WebSites":
-                    WpfTaskPane.Create(new WebSitesView(), LocaleDictionary.Translate(id), 500);
+                    WpfTaskPane.Show(new WebSitesView(), LocaleDictionary.Translate(id), 500);
                     break;
                 case "HebrewBooks":
-                    WpfTaskPane.Create(new HebrewBooksLib.HebrewBooksView(), LocaleDictionary.Translate(id), 600);
+                    WpfTaskPane.Show(new HebrewBooksLib.HebrewBooksView(), LocaleDictionary.Translate(id), 600);
+                    break;
+                case "Typesetting":
+                    WpfTaskPane.Show(new DocSeferLib.DocSeferLibView(Globals.ThisAddIn.Application), LocaleDictionary.Translate(id), 500);
                     break;
                 case "Settings":
-                    WpfTaskPane.Create(new SettingsView(), LocaleDictionary.Translate(id), 600);
+                    WpfTaskPane.Show(new SettingsView(), LocaleDictionary.Translate(id), 600);
                     break;
             }
         }
@@ -105,15 +107,16 @@ namespace KleiKodesh.Ribbon
 
         public bool getVisible(Office.IRibbonControl control)
         {
-            var property = typeof(SettingsViewModel).GetProperty($"Show{control.Id}");
-            if (property == null)
-                return true;
+            var settings = RibbbonSettingsViewModelHost.RibbbonSettings;
+            if (settings == null) return true;
 
-            var value = property.GetValue(null); // assuming static property
-            var isVisibleProp = value?.GetType().GetProperty("IsVisible");
+            var property = settings.GetType().GetProperty($"Show{control.Id}");
+            if (property == null) return true;
 
-            return (bool?)isVisibleProp?.GetValue(value) ?? true;
+            var model = property.GetValue(settings) as RibbbonSettingsViewModel.SettingsModel;
+            return model?.IsVisible ?? true;
         }
+
 
         #endregion
 

@@ -16,7 +16,8 @@ namespace KleiKodesh.Helpers
     public static class WpfTaskPane
     {
         public static Dispatcher Dispatcher { get; private set; }
-        public static CustomTaskPane Create<T>(T wpfControl, string title, int defaultWidth) where T : UIElement
+
+        public static CustomTaskPane Show<T>(T wpfControl, string title, int defaultWidth, bool isVisible = true) where T : UIElement
         {
             try
             {
@@ -30,13 +31,17 @@ namespace KleiKodesh.Helpers
                     SetWidth(taskpane, host, control, type, defaultWidth);
                     SetDockPostion(taskpane, type);
 
-                    var document = Globals.Factory.GetVstoObject(Globals.ThisAddIn.Application.ActiveDocument);
-                    document.CloseEvent += () => { Globals.ThisAddIn.CustomTaskPanes.Remove(taskpane); };
+                    try
+                    {
+                        var document = Globals.Factory.GetVstoObject(Globals.ThisAddIn.Application.ActiveDocument);
+                        document.CloseEvent += () => { Globals.ThisAddIn.CustomTaskPanes.Remove(taskpane); };
+                    }
+                    catch { }
 
                     SetWpfColor(host, control);
                 }
 
-                taskpane.Visible = true;
+                taskpane.Visible = isVisible;
                 return taskpane;
             }
             catch (Exception ex)

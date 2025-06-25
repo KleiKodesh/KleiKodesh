@@ -1,13 +1,10 @@
 ﻿using Microsoft.Win32;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.IO.Compression;
-using System.Linq;
 using System.Reflection;
 using System.Runtime.InteropServices;
-using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Navigation;
@@ -18,7 +15,7 @@ namespace KleiKodeshInstaller
     {
         // === Constants ===
         const string AppName = "כלי קודש";
-        const string Version = "1.6.4";
+        const string Version = "1.7.2";
         const string InstallFolderName = "KleiKodesh";
         const string ZipResourceName = "KleiKodeshInstaller.InstallerFiles.zip";
         const string VstoFileName = "KleiKodesh.vsto";

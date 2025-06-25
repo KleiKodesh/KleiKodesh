@@ -36,7 +36,6 @@
             </Style>
 
             <SolidColorBrush x:Key="LightBackground" Color="LightGray" Opacity="0.1"/>
-            <ObjectDataProvider x:Key="Settings" ObjectType="{x:Type local:SettingsViewModel}" />
         </ResourceDictionary>
     </UserControl.Resources>
 
@@ -55,23 +54,10 @@
                        Padding="5"
                        Background="{StaticResource LightBackground}"/>
 
-            <StackPanel Orientation="Horizontal">
-                <Image Source="/Otzarnik.png"/>
-                <CheckBox Content="אוצרניק" 
-                  IsChecked="{Binding Path=IsVisible, Source={x:Static local:SettingsViewModel.ShowOtzarnik}}" />
-            </StackPanel>
-
-            <StackPanel Orientation="Horizontal">
-                <Image Source="/WebSites.png"/>
-                <CheckBox Content="דרך האתרים" 
-          IsChecked="{Binding Path=IsVisible, Source={x:Static local:SettingsViewModel.ShowWebSites}}" />
-            </StackPanel>
-
-            <StackPanel Orientation="Horizontal">
-                <Image Source="/HebrewBooks.png"/>
-                <CheckBox Content="היברו בוקס" 
-                          IsChecked="{Binding Path=IsVisible, Source={x:Static local:SettingsViewModel.ShowHebrewBooks}}" />
-            </StackPanel>
+            <CheckBox Content="אוצרניק"   IsChecked="{Binding ShowOtzarnik.IsVisible, Source={x:Static local:RibbbonSettingsViewModelHost.RibbbonSettings}}" />
+            <CheckBox Content="דרך האתרים" IsChecked="{Binding ShowWebSites.IsVisible, Source={x:Static local:RibbbonSettingsViewModelHost.RibbbonSettings}}" />
+            <CheckBox Content="היברו בוקס"  IsChecked="{Binding ShowHebrewBooks.IsVisible, Source={x:Static local:RibbbonSettingsViewModelHost.RibbbonSettings}}" />
+            <CheckBox Content="עיצוב תורני"  IsChecked="{Binding ShowTypesetting.IsVisible, Source={x:Static local:RibbbonSettingsViewModelHost.RibbbonSettings}}" />
 
             <TextBlock Text="לחצן ראשי:" 
                       Margin="0,5"
@@ -79,14 +65,17 @@
                       Background="{StaticResource LightBackground}"/>
 
             <RadioButton GroupName="DefaultButton" Content="אוצרניק"
-                         IsEnabled="{Binding Path=IsVisible, Source={x:Static local:SettingsViewModel.ShowOtzarnik}}"
-                         IsChecked="{Binding Path=IsDefault, Source={x:Static local:SettingsViewModel.ShowOtzarnik}}"/>
+                         IsEnabled="{Binding ShowOtzarnik.IsVisible, Source={x:Static local:RibbbonSettingsViewModelHost.RibbbonSettings}}"
+                         IsChecked="{Binding ShowOtzarnik.IsDefault, Source={x:Static local:RibbbonSettingsViewModelHost.RibbbonSettings}}"/>
             <RadioButton GroupName="DefaultButton" Content="דרך האתרים"
-                         IsEnabled="{Binding Path=IsVisible, Source={x:Static local:SettingsViewModel.ShowWebSites}}"
-                         IsChecked="{Binding Path=IsDefault, Source={x:Static local:SettingsViewModel.ShowWebSites}}"/>
+                         IsEnabled="{Binding ShowWebSites.IsVisible, Source={x:Static local:RibbbonSettingsViewModelHost.RibbbonSettings}}"
+                         IsChecked="{Binding ShowWebSites.IsDefault, Source={x:Static local:RibbbonSettingsViewModelHost.RibbbonSettings}}"/>
             <RadioButton GroupName="DefaultButton" Content="היברו בוקס"
-                         IsEnabled="{Binding Path=IsVisible, Source={x:Static local:SettingsViewModel.ShowWebSites}}"
-                         IsChecked="{Binding Path=IsDefault, Source={x:Static local:SettingsViewModel.ShowHebrewBooks}}"/>
+                         IsEnabled="{Binding ShowHebrewBooks.IsVisible, Source={x:Static local:RibbbonSettingsViewModelHost.RibbbonSettings}}"
+                         IsChecked="{Binding ShowHebrewBooks.IsDefault, Source={x:Static local:RibbbonSettingsViewModelHost.RibbbonSettings}}"/>
+            <RadioButton GroupName="DefaultButton" Content="עיצוב תורני"
+               IsEnabled="{Binding ShowTypesetting.IsVisible, Source={x:Static local:RibbbonSettingsViewModelHost.RibbbonSettings}}"
+               IsChecked="{Binding ShowTypesetting.IsDefault, Source={x:Static local:RibbbonSettingsViewModelHost.RibbbonSettings}}"/>
         </StackPanel>
 
 

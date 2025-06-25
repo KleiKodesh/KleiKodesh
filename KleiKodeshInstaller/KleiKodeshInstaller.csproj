@@ -64,7 +64,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="SettingsViewModel.cs" />
+    <Compile Include="RibbbonSettingsViewModel.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -125,5 +125,8 @@
     <Resource Include="HebrewBooks.png" />
     <Resource Include="Otzarnik.png" />
     <Resource Include="WebSites.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Typesetting.png" />
   </ItemGroup>
 </Project>

@@ -286,6 +286,9 @@
     <Content Include="Resources\Klei_Kodesh.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\Typesetting.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\WebSites.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -326,7 +329,7 @@
     <Compile Include="Ribbon\SettingsView.xaml.cs">
       <DependentUpon>SettingsView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Ribbon\SettingsViewModel.cs" />
+    <Compile Include="Ribbon\RibbbonSettingsViewModel.cs" />
     <Compile Include="ThisAddIn.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -342,6 +345,10 @@
     <EmbeddedResource Include="Ribbon\KleiKodeshRibbon.xml" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\DocSefer\DocSeferLib\DocSeferLib.csproj">
+      <Project>{74e59bc0-41e5-475a-85cb-eacdc2ef6415}</Project>
+      <Name>DocSeferLib</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\HebrewBooksLib\HebrewBooksLib\HebrewBooksLib.csproj">
       <Project>{20c94936-5bdd-490d-bd60-6e43547cd9ff}</Project>
       <Name>HebrewBooksLib</Name>

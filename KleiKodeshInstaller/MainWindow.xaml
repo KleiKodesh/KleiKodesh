@@ -14,6 +14,9 @@
         Background="#FFF4F6F8"
         FontSize="14"
         FontFamily="Tahoma">
+    <Window.DataContext>
+        <local:RibbbonSettingsViewModel/>
+    </Window.DataContext>
     
     <Window.Resources>
         <Style TargetType="Button">
@@ -133,20 +136,26 @@
 
                     <StackPanel Orientation="Horizontal">
                         <Image Source="/Otzarnik.png"/>
-                        <CheckBox Content="אוצרניק" 
-                      IsChecked="{Binding Path=IsVisible, Source={x:Static local:SettingsViewModel.ShowOtzarnik}}"/>
+                        <CheckBox Content="אוצרניק"
+                                  IsChecked="{Binding ShowOtzarnik.IsVisible}"/>
                     </StackPanel>
 
                     <StackPanel Orientation="Horizontal">
                         <Image Source="/WebSites.png"/>
                         <CheckBox Content="דרך האתרים"
-                       IsChecked="{Binding Path=IsVisible, Source={x:Static local:SettingsViewModel.ShowWebSites}}"/>
+                      IsChecked="{Binding ShowWebSites.IsVisible}"/>
                     </StackPanel>
 
                     <StackPanel Orientation="Horizontal">
                         <Image Source="/HebrewBooks.png"/>
                         <CheckBox Content="היברו בוקס"
-                      IsChecked="{Binding Path=IsVisible, Source={x:Static local:SettingsViewModel.ShowHebrewBooks}}"/>
+                      IsChecked="{Binding ShowHebrewBooks.IsVisible}"/>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="/Typesetting.png"/>
+                        <CheckBox Content="עיצוב תורני"
+                                IsChecked="{Binding ShowTypesetting.IsVisible}"/>
                     </StackPanel>
                 </StackPanel>
 
@@ -157,14 +166,17 @@
                                Opacity="0.8"/>
                     
                     <RadioButton GroupName="DefaultButton" Content="אוצרניק"
-                              IsEnabled="{Binding Path=IsVisible, Source={x:Static local:SettingsViewModel.ShowOtzarnik}}"
-                              IsChecked="{Binding Path=IsDefault, Source={x:Static local:SettingsViewModel.ShowOtzarnik}}"/>
+                                 IsChecked="{Binding ShowOtzarnik.IsDefault}"
+                                 IsEnabled="{Binding ShowOtzarnik.IsVisible}"/>
                     <RadioButton GroupName="DefaultButton" Content="דרך האתרים"
-                              IsEnabled="{Binding Path=IsVisible, Source={x:Static local:SettingsViewModel.ShowWebSites}}"
-                              IsChecked="{Binding Path=IsDefault, Source={x:Static local:SettingsViewModel.ShowWebSites}}"/>
+                                 IsChecked="{Binding ShowWebSites.IsDefault}"
+                                 IsEnabled="{Binding ShowWebSites.IsVisible}"/>
                     <RadioButton GroupName="DefaultButton" Content="היברו בוקס"
-                              IsEnabled="{Binding Path=IsVisible, Source={x:Static local:SettingsViewModel.ShowWebSites}}"
-                              IsChecked="{Binding Path=IsDefault, Source={x:Static local:SettingsViewModel.ShowHebrewBooks}}"/>
+                              IsChecked="{Binding ShowHebrewBooks.IsDefault}"
+                                 IsEnabled="{Binding ShowHebrewBooks.IsVisible}"/>
+                    <RadioButton GroupName="DefaultButton" Content="עיצוב תורני"
+                           IsChecked="{Binding ShowTypesetting.IsDefault}"
+                              IsEnabled="{Binding ShowTypesetting.IsVisible}"/>
                 </StackPanel>
             </StackPanel>
         </StackPanel>

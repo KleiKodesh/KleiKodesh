@@ -32,6 +32,7 @@ namespace KleiKodesh.Helpers
         public OfficeThemeWatcher()
         {
             StartWatcher();
+            OnThemeChanged();
         }
 
         private int GetOfficeVersion()
@@ -170,6 +171,8 @@ namespace KleiKodesh.Helpers
                WpfTaskPane.Dispatcher?.Invoke(() => {
                    ThemeHelper.Background = new SolidColorBrush(theme.BackgroundColor);
                    ThemeHelper.Foreground = new SolidColorBrush(theme.TextColor);
+                   ThemeManager.Theme.Background = new SolidColorBrush(theme.BackgroundColor);
+                   ThemeManager.Theme.Foreground = new SolidColorBrush(theme.TextColor);
                });
         }
 

@@ -9,6 +9,7 @@
 							<button id="Otzarnik" getImage="getImage" getLabel="getLabel" onAction="button_Click" getVisible="getVisible"/>
 							<button id="WebSites" getImage="getImage" getLabel="getLabel" onAction="button_Click" getVisible="getVisible"/>
 							<button id="HebrewBooks" getImage="getImage" getLabel="getLabel" onAction="button_Click" getVisible="getVisible"/>
+							<button id="Typesetting" getImage="getImage" getLabel="getLabel" onAction="button_Click" getVisible="getVisible"/>
 							<button id="Settings" imageMso="ComAddInsDialog" getLabel="getLabel" onAction="button_Click"/>
 						</menu>
 					</splitButton>
