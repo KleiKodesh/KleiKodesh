@@ -17,8 +17,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebViewLib", "..\WebViewLib
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KleiKodeshInstaller", "KleiKodeshInstaller\KleiKodeshInstaller.csproj", "{48AB8B56-CDF7-4B26-9FF3-7581C2E36CDF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OtzarnikLib", "..\Otzarnik\OtzarnikLib\OtzarnikLib.csproj", "{960FD04C-0FAF-49CF-99F5-764444AAB544}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocSeferLib", "..\DocSefer\DocSeferLib\DocSeferLib.csproj", "{74E59BC0-41E5-475A-85CB-EACDC2EF6415}"
 EndProject
 Global
@@ -55,10 +53,6 @@ Global
 		{48AB8B56-CDF7-4B26-9FF3-7581C2E36CDF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{48AB8B56-CDF7-4B26-9FF3-7581C2E36CDF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{48AB8B56-CDF7-4B26-9FF3-7581C2E36CDF}.Release|Any CPU.Build.0 = Release|Any CPU
-		{960FD04C-0FAF-49CF-99F5-764444AAB544}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{960FD04C-0FAF-49CF-99F5-764444AAB544}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{960FD04C-0FAF-49CF-99F5-764444AAB544}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{960FD04C-0FAF-49CF-99F5-764444AAB544}.Release|Any CPU.Build.0 = Release|Any CPU
 		{74E59BC0-41E5-475A-85CB-EACDC2EF6415}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{74E59BC0-41E5-475A-85CB-EACDC2EF6415}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{74E59BC0-41E5-475A-85CB-EACDC2EF6415}.Release|Any CPU.ActiveCfg = Release|Any CPU

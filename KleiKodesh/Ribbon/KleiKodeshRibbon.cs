@@ -1,4 +1,5 @@
 ﻿using KleiKodesh.Helpers;
+using KleiKodesh.RibbonSettings;
 using Microsoft.Office.Core;
 using Oztarnik.Main;
 using System;
@@ -43,16 +44,15 @@ namespace KleiKodesh.Ribbon
         void LoadSettings()
         {
             LocaleDictionary.UseOfficeLocale(Globals.ThisAddIn.Application, AppDomain.CurrentDomain.BaseDirectory);
-            UpdateHelper.Update("KleiKodesh", "KleiKodesh", "v1.7.2", 1, "נמצאו עדכונים עבור כלי קודש בוורד, האם ברצונך להורידם כעת?");
+            UpdateHelper.Update("KleiKodesh", "KleiKodesh", "v1.7.3", 1, "נמצאו עדכונים עבור כלי קודש בוורד, האם ברצונך להורידם כעת?");
             Oztarnik.Helpers.WdWpfWindowHelper.Application = Globals.ThisAddIn.Application;
-            var taskPane = WpfTaskPane.Show(new SettingsView(), " ", 600, false);
         }
 
 
         public void button_Click(Office.IRibbonControl control)
         {
             if (control.Id == "Klei_Kodesh_Main")
-                Execute(RibbbonSettingsViewModelHost.RibbbonSettings.GetDefaultSettingKey());
+                Execute(RibbonSettingsManager.GetDefaultSettingKey());
             else
                 Execute(control.Id);
         }
@@ -72,10 +72,11 @@ namespace KleiKodesh.Ribbon
                     WpfTaskPane.Show(new HebrewBooksLib.HebrewBooksView(), LocaleDictionary.Translate(id), 600);
                     break;
                 case "Typesetting":
-                    WpfTaskPane.Show(new DocSeferLib.DocSeferLibView(Globals.ThisAddIn.Application), LocaleDictionary.Translate(id), 500);
+                    WpfTaskPane.Show(new DocSeferLib.DocSeferLibView(Globals.ThisAddIn.Application, Globals.Factory), LocaleDictionary.Translate(id), 510);
                     break;
                 case "Settings":
-                    WpfTaskPane.Show(new SettingsView(), LocaleDictionary.Translate(id), 600);
+                    //WpfTaskPane.Show(new SettingsView(), LocaleDictionary.Translate(id), 600);
+                    WinformsTaskPane.Show(new RibbonSettingsView(ribbon));
                     break;
             }
         }
@@ -105,17 +106,8 @@ namespace KleiKodesh.Ribbon
             }
         }
 
-        public bool getVisible(Office.IRibbonControl control)
-        {
-            var settings = RibbbonSettingsViewModelHost.RibbbonSettings;
-            if (settings == null) return true;
-
-            var property = settings.GetType().GetProperty($"Show{control.Id}");
-            if (property == null) return true;
-
-            var model = property.GetValue(settings) as RibbbonSettingsViewModel.SettingsModel;
-            return model?.IsVisible ?? true;
-        }
+        public bool getVisible(Office.IRibbonControl control) =>
+            RibbonSettingsManager.GetVisible(control.Id);
 
 
         #endregion

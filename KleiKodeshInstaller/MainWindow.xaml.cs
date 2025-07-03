@@ -15,7 +15,7 @@ namespace KleiKodeshInstaller
     {
         // === Constants ===
         const string AppName = "כלי קודש";
-        const string Version = "1.7.2";
+        const string Version = "1.7.3";
         const string InstallFolderName = "KleiKodesh";
         const string ZipResourceName = "KleiKodeshInstaller.InstallerFiles.zip";
         const string VstoFileName = "KleiKodesh.vsto";

@@ -174,6 +174,8 @@ namespace KleiKodesh.Helpers
                    ThemeManager.Theme.Background = new SolidColorBrush(theme.BackgroundColor);
                    ThemeManager.Theme.Foreground = new SolidColorBrush(theme.TextColor);
                });
+            WebViewLib.ThemeManager.Theme.Background = new SolidColorBrush(theme.BackgroundColor);
+            WebViewLib.ThemeManager.Theme.Foreground = new SolidColorBrush(theme.TextColor);
         }
 
 

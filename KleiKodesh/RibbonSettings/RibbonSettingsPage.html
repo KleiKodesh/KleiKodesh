@@ -1,0 +1,138 @@
+﻿<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>הגדרות</title>
+    <style>
+        * {
+            user-select: none; /* Disable text selection */
+            cursor: default !important; /* Force pointer cursor everywhere */
+        }
+
+        body {
+            font-family: Tahoma, sans-serif;
+            margin: auto;
+        }
+
+        .header {
+            display: flex;
+            align-items: center;
+            margin: 5px;
+            margin-bottom: 10px;
+            font-size: 170%;
+        }
+
+            .header img {
+                height: 35px;
+                margin-left: 10px;
+            }
+
+        .section-header {
+            background-color: rgb(200, 200, 200, 0.30); /* LightGray with opacity */
+            padding: 5px;
+        }
+
+        .checkbox, .radio {
+            margin: 5px;
+            display: flex;
+            align-items: center;
+            font-size: 90%;
+        }
+
+        .checkbox input, .radio input {
+            margin-left: 8px;
+        }
+    </style>
+</head>
+<body dir="auto">
+
+    <div class="header">
+        <img src="../Resources/Klei_Kodesh.png" />
+        הגדרות
+    </div>
+
+    <div>
+        <div class="section-header">רכיבים זמינים:</div>
+
+        <div class="checkbox"><input type="checkbox" id="chk-otzarnik"><label for="chk-otzarnik">אוצרניק</label></div>
+        <div class="checkbox"><input type="checkbox" id="chk-websites"><label for="chk-websites">דרך האתרים</label></div>
+        <div class="checkbox"><input type="checkbox" id="chk-hebrewbooks"><label for="chk-hebrewbooks">היברו בוקס</label></div>
+        <div class="checkbox"><input type="checkbox" id="chk-typesetting"><label for="chk-typesetting">עיצוב תורני</label></div>
+
+        <div class="section-header" style="margin-top:10px;">לחצן ראשי:</div>
+
+        <div class="radio"><input type="radio" name="default-btn" id="radio-otzarnik"><label for="radio-otzarnik">אוצרניק</label></div>
+        <div class="radio"><input type="radio" name="default-btn" id="radio-websites"><label for="radio-websites">דרך האתרים</label></div>
+        <div class="radio"><input type="radio" name="default-btn" id="radio-hebrewbooks"><label for="radio-hebrewbooks">היברו בוקס</label></div>
+        <div class="radio"><input type="radio" name="default-btn" id="radio-typesetting"><label for="radio-typesetting">עיצוב תורני</label></div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const items = [
+                { key: "Otzarnik", checkboxId: "chk-otzarnik", radioId: "radio-otzarnik" },
+                { key: "WebSites", checkboxId: "chk-websites", radioId: "radio-websites" },
+                { key: "HebrewBooks", checkboxId: "chk-hebrewbooks", radioId: "radio-hebrewbooks" },
+                { key: "Typesetting", checkboxId: "chk-typesetting", radioId: "radio-typesetting" },
+            ];
+
+            const applySettings = (lines) => {
+                for (const line of lines) {
+                    console.log(line);
+                    const [key, isVisible, isDefault] = line.split(',');
+                    const item = items.find(i => i.key === key);
+                    if (!item) continue;
+                    const checkbox = document.getElementById(item.checkboxId);
+                    const radio = document.getElementById(item.radioId);
+                    console.log(isVisible, isDefault);
+                    if (isVisible.toLowerCase() === "true") {
+                        checkbox.checked = true;
+                        if (isDefault.toLowerCase() === "true") { radio.checked = true; }
+                    }
+                    else radio.disabled = true;
+                }
+            };
+
+            const save = () => {
+                const data = items.map(item => {
+                    const isVisible = document.getElementById(item.checkboxId).checked;
+                    const isDefault = document.getElementById(item.radioId).checked;
+                    return `${item.key},${isVisible},${isDefault}`;
+                });
+
+                window.chrome.webview.postMessage({
+                    action: "set",
+                    target: "Lines",
+                    value: data
+                });
+            };
+
+            items.forEach(item => {
+                const checkbox = document.getElementById(item.checkboxId);
+                const radio = document.getElementById(item.radioId);
+
+                checkbox.addEventListener("click", () => {
+                    radio.disabled = !checkbox.checked; // disable radio if checkbox is unchecked
+                    save();
+                });
+
+                radio.addEventListener("click", save);
+            });
+
+            window.chrome.webview.addEventListener('message', e => {
+                console.log(e.data.lines);
+                if (e.data?.type === 'load') {  
+                    applySettings(e.data.lines || []);
+                }
+            });
+
+            window.chrome.webview.postMessage({
+                action: "call",
+                target: "LoadSettings"
+            });
+        });
+    </script>
+
+
+</body>
+</html>

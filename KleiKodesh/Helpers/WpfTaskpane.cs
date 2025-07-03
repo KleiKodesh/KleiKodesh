@@ -63,6 +63,7 @@ namespace KleiKodesh.Helpers
 
             return taskPane != null;
         }
+
         static UserControl WpfHost(Control wpfControl)
         {
             var elementHost = new ElementHost
@@ -76,6 +77,7 @@ namespace KleiKodesh.Helpers
             hostControl.Tag = wpfControl;
             return hostControl;
         }
+
         static void SetWidth(CustomTaskPane taskPane, UserControl hostControl, Control control, string type, int defaultWidth)
         {
             taskPane.Width = int.Parse(Interaction.GetSetting(AppDomain.CurrentDomain.FriendlyName, type, "TaskPaneWidth", defaultWidth.ToString()));
