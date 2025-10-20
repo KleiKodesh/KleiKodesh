@@ -90,11 +90,11 @@ namespace KleiKodesh.Helpers
             {
                 var foreColor = userControl.ForeColor;
                 var forefixedColor = Color.FromArgb(foreColor.A, foreColor.B, foreColor.G, foreColor.R);
-                WebViewLib.ThemeManager.Theme.Foreground = new SolidColorBrush(Color.FromArgb(forefixedColor.A, forefixedColor.R, forefixedColor.G, forefixedColor.B));
+                WebViewLib.ThemeManager.Theme.Foreground = Color.FromArgb(forefixedColor.A, forefixedColor.R, forefixedColor.G, forefixedColor.B);
 
                 var backColor = userControl.BackColor;
                 var backfixedColor = Color.FromArgb(backColor.A, backColor.B, backColor.G, backColor.R);
-                WebViewLib.ThemeManager.Theme.Background = new SolidColorBrush(Color.FromArgb(backfixedColor.A, backfixedColor.R, backfixedColor.G, backfixedColor.B));
+                WebViewLib.ThemeManager.Theme.Background = Color.FromArgb(backfixedColor.A, backfixedColor.R, backfixedColor.G, backfixedColor.B);
             }
         }
     }

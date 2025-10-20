@@ -5,6 +5,7 @@ using System.Management;
 using System.Security.Principal;
 using WpfLib.Helpers;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.TrayNotify;
+using System.Windows.Threading;
 
 namespace KleiKodesh.Helpers
 {
@@ -28,9 +29,11 @@ namespace KleiKodesh.Helpers
     public class OfficeThemeWatcher
     {
         private ManagementEventWatcher watcher;
+        Dispatcher dispatcher;
 
         public OfficeThemeWatcher()
         {
+            dispatcher = Dispatcher.CurrentDispatcher;
             StartWatcher();
             OnThemeChanged();
         }
@@ -168,14 +171,15 @@ namespace KleiKodesh.Helpers
         public void OnThemeChanged()
         {
             var theme = GetCurrentTheme();
-               WpfTaskPane.Dispatcher?.Invoke(() => {
-                   ThemeHelper.Background = new SolidColorBrush(theme.BackgroundColor);
-                   ThemeHelper.Foreground = new SolidColorBrush(theme.TextColor);
-                   ThemeManager.Theme.Background = new SolidColorBrush(theme.BackgroundColor);
-                   ThemeManager.Theme.Foreground = new SolidColorBrush(theme.TextColor);
-               });
-            WebViewLib.ThemeManager.Theme.Background = new SolidColorBrush(theme.BackgroundColor);
-            WebViewLib.ThemeManager.Theme.Foreground = new SolidColorBrush(theme.TextColor);
+
+            dispatcher.Invoke(() => {
+                ThemeHelper.Background = new SolidColorBrush(theme.BackgroundColor);
+                ThemeHelper.Foreground = new SolidColorBrush(theme.TextColor);
+                ThemeManager.Theme.Background = new SolidColorBrush(theme.BackgroundColor);
+                ThemeManager.Theme.Foreground = new SolidColorBrush(theme.TextColor);
+                WebViewLib.ThemeManager.Theme.Background = theme.BackgroundColor;
+                WebViewLib.ThemeManager.Theme.Foreground = theme.TextColor;
+            });
         }
 
 

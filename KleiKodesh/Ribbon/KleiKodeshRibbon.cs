@@ -52,7 +52,8 @@ namespace KleiKodesh.Ribbon
         public void button_Click(Office.IRibbonControl control)
         {
             if (control.Id == "Klei_Kodesh_Main")
-                Execute(RibbonSettingsManager.GetDefaultSettingKey());
+                //Execute(RibbonSettingsManager.GetDefaultSettingKey());
+                Execute(RibbbonSettingsViewModelHost.RibbbonSettings.GetDefaultSettingKey());
             else
                 Execute(control.Id);
         }
@@ -75,8 +76,8 @@ namespace KleiKodesh.Ribbon
                     WpfTaskPane.Show(new DocSeferLib.DocSeferLibView(Globals.ThisAddIn.Application, Globals.Factory), LocaleDictionary.Translate(id), 510);
                     break;
                 case "Settings":
-                    //WpfTaskPane.Show(new SettingsView(), LocaleDictionary.Translate(id), 600);
-                    WinformsTaskPane.Show(new RibbonSettingsView(ribbon));
+                    WpfTaskPane.Show(new SettingsView(), LocaleDictionary.Translate(id), 600);
+                    //WinformsTaskPane.Show(new RibbonSettingsView(ribbon));
                     break;
             }
         }
@@ -107,7 +108,7 @@ namespace KleiKodesh.Ribbon
         }
 
         public bool getVisible(Office.IRibbonControl control) =>
-            RibbonSettingsManager.GetVisible(control.Id);
+            RibbbonSettingsViewModelHost.RibbbonSettings.GetVisible(control.Id);
 
 
         #endregion

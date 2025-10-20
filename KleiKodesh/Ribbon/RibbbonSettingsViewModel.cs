@@ -76,6 +76,16 @@ namespace KleiKodesh.Ribbon
             return count;
         }
 
+        public bool GetVisible(string id)
+        {
+            if (id == "Otzarnik") return ShowOtzarnik.IsVisible;
+            else if (id == "WebSites") return ShowWebSites.IsVisible;
+            else if (id == "HebrewBooks") return ShowHebrewBooks.IsVisible;
+            else if (id == "Typesetting") return ShowTypesetting.IsVisible;
+            return true;
+        }
+
+
         public class SettingsModel : INotifyPropertyChanged
         {
             public event PropertyChangedEventHandler PropertyChanged;
