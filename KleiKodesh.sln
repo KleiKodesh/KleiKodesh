@@ -19,6 +19,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KleiKodeshInstaller", "Klei
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocSeferLib", "..\DocSefer\DocSeferLib\DocSeferLib.csproj", "{74E59BC0-41E5-475A-85CB-EACDC2EF6415}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zayit", "..\..\Zayit\vue-zayit\ZayitLib\Zayit\Zayit.csproj", "{A67FD876-CC61-4029-B5F6-27C4F1505776}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -57,6 +59,10 @@ Global
 		{74E59BC0-41E5-475A-85CB-EACDC2EF6415}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{74E59BC0-41E5-475A-85CB-EACDC2EF6415}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{74E59BC0-41E5-475A-85CB-EACDC2EF6415}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A67FD876-CC61-4029-B5F6-27C4F1505776}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A67FD876-CC61-4029-B5F6-27C4F1505776}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A67FD876-CC61-4029-B5F6-27C4F1505776}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A67FD876-CC61-4029-B5F6-27C4F1505776}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

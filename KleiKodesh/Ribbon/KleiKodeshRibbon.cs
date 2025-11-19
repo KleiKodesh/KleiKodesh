@@ -66,6 +66,9 @@ namespace KleiKodesh.Ribbon
                     WpfTaskPane.Show(new OtzarnikView(), LocaleDictionary.Translate(id), 600);
                     //WpfTaskPane.Create(new OtzarnikLib.UI.MainView(), LocaleDictionary.Translate(id), 600);
                     break;
+                case "Zayit":
+                    WinformsTaskPane.Show(new Zayit.Viewer.ZayitViewerHost(), LocaleDictionary.Translate(id), 600);
+                    break;
                 case "WebSites":
                     WpfTaskPane.Show(new WebSitesView(), LocaleDictionary.Translate(id), 500);
                     break;

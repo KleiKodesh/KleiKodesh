@@ -25,6 +25,11 @@ namespace KleiKodesh.Helpers
 
                 pane.Width = width;
                 pane.Visible = isVisible;
+                userControl.VisibleChanged += (_, __) =>
+                {
+                    try { pane.Visible = userControl.Visible; } catch { }
+
+                };
                 //pane.VisibleChanged += (_, __) => userControl.Visible = pane.Visible;
 
                 AttachRemoveOnClose(pane, userControl);
