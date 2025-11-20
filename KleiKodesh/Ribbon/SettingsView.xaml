@@ -55,6 +55,7 @@
                        Background="{StaticResource LightBackground}"/>
 
             <CheckBox Content="אוצרניק"   IsChecked="{Binding ShowOtzarnik.IsVisible, Source={x:Static local:RibbbonSettingsViewModelHost.RibbbonSettings}}" />
+            <CheckBox Content="זית"   IsChecked="{Binding ShowZayit.IsVisible, Source={x:Static local:RibbbonSettingsViewModelHost.RibbbonSettings}}" />
             <CheckBox Content="דרך האתרים" IsChecked="{Binding ShowWebSites.IsVisible, Source={x:Static local:RibbbonSettingsViewModelHost.RibbbonSettings}}" />
             <CheckBox Content="היברו בוקס"  IsChecked="{Binding ShowHebrewBooks.IsVisible, Source={x:Static local:RibbbonSettingsViewModelHost.RibbbonSettings}}" />
             <CheckBox Content="עיצוב תורני"  IsChecked="{Binding ShowTypesetting.IsVisible, Source={x:Static local:RibbbonSettingsViewModelHost.RibbbonSettings}}" />
@@ -67,6 +68,9 @@
             <RadioButton GroupName="DefaultButton" Content="אוצרניק"
                          IsEnabled="{Binding ShowOtzarnik.IsVisible, Source={x:Static local:RibbbonSettingsViewModelHost.RibbbonSettings}}"
                          IsChecked="{Binding ShowOtzarnik.IsDefault, Source={x:Static local:RibbbonSettingsViewModelHost.RibbbonSettings}}"/>
+            <RadioButton GroupName="DefaultButton" Content="זית"
+                IsEnabled="{Binding ShowZayit.IsVisible, Source={x:Static local:RibbbonSettingsViewModelHost.RibbbonSettings}}"
+                IsChecked="{Binding ShowZayit.IsDefault, Source={x:Static local:RibbbonSettingsViewModelHost.RibbbonSettings}}"/>
             <RadioButton GroupName="DefaultButton" Content="דרך האתרים"
                          IsEnabled="{Binding ShowWebSites.IsVisible, Source={x:Static local:RibbbonSettingsViewModelHost.RibbbonSettings}}"
                          IsChecked="{Binding ShowWebSites.IsDefault, Source={x:Static local:RibbbonSettingsViewModelHost.RibbbonSettings}}"/>

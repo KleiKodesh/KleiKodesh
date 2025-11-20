@@ -45,22 +45,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.VisualBasic" />
-    <Reference Include="Microsoft.Web.WebView2.Core, Version=1.0.3595.46, Culture=neutral, PublicKeyToken=2a8ab48044d2601e, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Web.WebView2.1.0.3595.46\lib\net462\Microsoft.Web.WebView2.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Web.WebView2.WinForms, Version=1.0.3595.46, Culture=neutral, PublicKeyToken=2a8ab48044d2601e, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Web.WebView2.1.0.3595.46\lib\net462\Microsoft.Web.WebView2.WinForms.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Web.WebView2.Wpf, Version=1.0.3595.46, Culture=neutral, PublicKeyToken=2a8ab48044d2601e, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Web.WebView2.1.0.3595.46\lib\net462\Microsoft.Web.WebView2.Wpf.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.IO.Compression" />
     <Reference Include="System.Numerics" />
-    <Reference Include="System.Text.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Text.Json.10.0.0\lib\net462\System.Text.Json.dll</HintPath>
-    </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -125,10 +113,12 @@
   <Target Name="IncrementVersionAndRebuildAddin" BeforeTargets="BeforeBuild" Condition="'$(Configuration)' == 'Release'">
     <PropertyGroup>
       <MSBuildPath>C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin\MSBuild.exe</MSBuildPath>
-      <KleiKodeshProject>$(SolutionDir)KleiKodesh\KleiKodesh.csproj</KleiKodeshProject>
+      <SolutionDirectory>$(MSBuildProjectDirectory)\..</SolutionDirectory>
+      <KleiKodeshProject>$(SolutionDirectory)\KleiKodesh\KleiKodesh.csproj</KleiKodeshProject>
+      <IncrementScript>$(SolutionDirectory)\IncrementVersion.ps1</IncrementScript>
     </PropertyGroup>
     <!-- Increment version -->
-    <Exec Command="powershell -ExecutionPolicy Bypass -File &quot;$(SolutionDir)IncrementVersion.ps1&quot; -SolutionDir &quot;$(SolutionDir)&quot;" />
+    <Exec Command="powershell -ExecutionPolicy Bypass -File &quot;$(IncrementScript)&quot; -SolutionDir &quot;$(SolutionDirectory)&quot;" />
     <!-- Rebuild KleiKodesh in Release mode -->
     <Exec Command="&quot;$(MSBuildPath)&quot; &quot;$(KleiKodeshProject)&quot; /t:Rebuild /p:Configuration=Release /nologo" />
   </Target>
@@ -155,11 +145,9 @@
   <ItemGroup>
     <Resource Include="Typesetting.png" />
   </ItemGroup>
-  <Import Project="..\packages\Microsoft.Web.WebView2.1.0.3595.46\build\Microsoft.Web.WebView2.targets" Condition="Exists('..\packages\Microsoft.Web.WebView2.1.0.3595.46\build\Microsoft.Web.WebView2.targets')" />
-  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
-    <PropertyGroup>
-      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
-    </PropertyGroup>
-    <Error Condition="!Exists('..\packages\Microsoft.Web.WebView2.1.0.3595.46\build\Microsoft.Web.WebView2.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Web.WebView2.1.0.3595.46\build\Microsoft.Web.WebView2.targets'))" />
-  </Target>
+  <ItemGroup>
+    <Resource Include="Zayit.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
 </Project>

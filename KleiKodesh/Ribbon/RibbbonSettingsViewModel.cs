@@ -17,6 +17,7 @@ namespace KleiKodesh.Ribbon
             Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "KleiKodesh", "RibbonSettings.csv");
 
         public SettingsModel ShowOtzarnik { get; } = new SettingsModel();
+        public SettingsModel ShowZayit { get; } = new SettingsModel();
         public SettingsModel ShowWebSites { get; } = new SettingsModel();
         public SettingsModel ShowHebrewBooks { get; } = new SettingsModel();
         public SettingsModel ShowTypesetting { get; } = new SettingsModel();
@@ -24,6 +25,7 @@ namespace KleiKodesh.Ribbon
         public RibbbonSettingsViewModel()
         {
             ShowOtzarnik.PropertyChanged += (s,_) => { Save(); RibbbonSettingsViewModelHost.Ribbon?.InvalidateControl("Otzarnik"); };
+            ShowZayit.PropertyChanged += (s, _) => { Save(); RibbbonSettingsViewModelHost.Ribbon?.InvalidateControl("Zayit"); };
             ShowWebSites.PropertyChanged += (s, _) => { Save(); RibbbonSettingsViewModelHost.Ribbon?.InvalidateControl("WebSites"); };
             ShowHebrewBooks.PropertyChanged += (s, _) => { Save(); RibbbonSettingsViewModelHost.Ribbon?.InvalidateControl("HebrewBooks"); };
             ShowTypesetting.PropertyChanged += (s, _) => { Save(); RibbbonSettingsViewModelHost.Ribbon?.InvalidateControl("Typesetting"); };
@@ -60,6 +62,7 @@ namespace KleiKodesh.Ribbon
         public string GetDefaultSettingKey()
         {
             if (ShowOtzarnik.IsDefault && ShowOtzarnik.IsVisible) return "Otzarnik";
+            if (ShowZayit.IsDefault && ShowZayit.IsVisible) return "Zayit";
             if (ShowWebSites.IsDefault && ShowWebSites.IsVisible) return "WebSites";
             if (ShowHebrewBooks.IsDefault && ShowHebrewBooks.IsVisible) return "HebrewBooks";
             if (ShowTypesetting.IsDefault && ShowHebrewBooks.IsVisible) return "Typesetting";
@@ -70,6 +73,7 @@ namespace KleiKodesh.Ribbon
         {
             int count = 0;
             if (ShowOtzarnik.IsVisible) count++;
+            if (ShowZayit.IsVisible) count++;
             if (ShowWebSites.IsVisible) count++;
             if (ShowHebrewBooks.IsVisible) count++;
             if (ShowTypesetting.IsVisible) count++;
@@ -79,6 +83,7 @@ namespace KleiKodesh.Ribbon
         public bool GetVisible(string id)
         {
             if (id == "Otzarnik") return ShowOtzarnik.IsVisible;
+            if (id == "Zayit") return ShowZayit.IsVisible;
             else if (id == "WebSites") return ShowWebSites.IsVisible;
             else if (id == "HebrewBooks") return ShowHebrewBooks.IsVisible;
             else if (id == "Typesetting") return ShowTypesetting.IsVisible;

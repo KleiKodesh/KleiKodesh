@@ -10,6 +10,7 @@ namespace KleiKodeshInstaller
             Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "KleiKodesh", "RibbonSettings.csv");
 
         public SettingsModel ShowOtzarnik { get; } = new SettingsModel();
+        public SettingsModel ShowZayit { get; } = new SettingsModel();
         public SettingsModel ShowWebSites { get; } = new SettingsModel();
         public SettingsModel ShowHebrewBooks { get; } = new SettingsModel();
         public SettingsModel ShowTypesetting { get; } = new SettingsModel();
@@ -17,6 +18,7 @@ namespace KleiKodeshInstaller
         public RibbbonSettingsViewModel()
         {
             ShowOtzarnik.PropertyChanged += (s, _) => { Save();  };
+            ShowZayit.PropertyChanged += (s, _) => { Save(); };
             ShowWebSites.PropertyChanged += (s, _) => { Save();  };
             ShowHebrewBooks.PropertyChanged += (s, _) => { Save(); };
             ShowTypesetting.PropertyChanged += (s, _) => { Save();};
@@ -53,6 +55,7 @@ namespace KleiKodeshInstaller
         public string GetDefaultSettingKey()
         {
             if (ShowOtzarnik.IsDefault && ShowOtzarnik.IsVisible) return "Otzarnik";
+            if (ShowZayit.IsDefault && ShowZayit.IsVisible) return "Zayit";
             if (ShowWebSites.IsDefault && ShowWebSites.IsVisible) return "WebSites";
             if (ShowHebrewBooks.IsDefault && ShowHebrewBooks.IsVisible) return "HebrewBooks";
             if (ShowTypesetting.IsDefault && ShowHebrewBooks.IsVisible) return "Typesetting";
@@ -63,6 +66,7 @@ namespace KleiKodeshInstaller
         {
             int count = 0;
             if (ShowOtzarnik.IsVisible) count++;
+            if (ShowZayit.IsVisible) count++;
             if (ShowWebSites.IsVisible) count++;
             if (ShowHebrewBooks.IsVisible) count++;
             if (ShowTypesetting.IsVisible) count++;

@@ -43,7 +43,7 @@ namespace KleiKodesh.Ribbon
 
         void LoadSettings()
         {
-            string version = "v1.8.4";
+            string version = "v2.0.1";
             LocaleDictionary.UseOfficeLocale(Globals.ThisAddIn.Application, AppDomain.CurrentDomain.BaseDirectory);
             UpdateHelper.Update("KleiKodesh", "KleiKodesh", version, 1, "נמצאו עדכונים עבור כלי קודש בוורד, האם ברצונך להורידם כעת?");
             Oztarnik.Helpers.WdWpfWindowHelper.Application = Globals.ThisAddIn.Application;
@@ -68,7 +68,7 @@ namespace KleiKodesh.Ribbon
                     //WpfTaskPane.Create(new OtzarnikLib.UI.MainView(), LocaleDictionary.Translate(id), 600);
                     break;
                 case "Zayit":
-                    WinformsTaskPane.Show(new Zayit.Viewer.ZayitViewerHost(), LocaleDictionary.Translate(id), 600);
+                    WinformsTaskPane.Show(new Zayit.Viewer.ZayitViewerHost(Globals.ThisAddIn.Application.ActiveWindow), LocaleDictionary.Translate(id), 600);
                     break;
                 case "WebSites":
                     WpfTaskPane.Show(new WebSitesView(), LocaleDictionary.Translate(id), 500);

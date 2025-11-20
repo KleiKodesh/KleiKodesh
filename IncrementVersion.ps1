@@ -5,8 +5,26 @@ param(
     [string]$SolutionDir
 )
 
+# Normalize the path and ensure it's absolute
+$SolutionDir = [System.IO.Path]::GetFullPath($SolutionDir)
+
+# Ensure SolutionDir ends with backslash
+if (-not $SolutionDir.EndsWith('\')) {
+    $SolutionDir = $SolutionDir + '\'
+}
+
 $ribbonFile = Join-Path $SolutionDir "KleiKodesh\Ribbon\KleiKodeshRibbon.cs"
 $mainWindowFile = Join-Path $SolutionDir "KleiKodeshInstaller\MainWindow.xaml.cs"
+
+# Verify files exist
+if (-not (Test-Path $ribbonFile)) {
+    Write-Error "KleiKodeshRibbon.cs not found at: $ribbonFile"
+    exit 1
+}
+if (-not (Test-Path $mainWindowFile)) {
+    Write-Error "MainWindow.xaml.cs not found at: $mainWindowFile"
+    exit 1
+}
 
 function Increment-Version {
     param([string]$version)
