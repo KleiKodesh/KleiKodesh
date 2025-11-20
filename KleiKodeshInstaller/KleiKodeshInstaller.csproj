@@ -122,6 +122,16 @@
     <None Include="App.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Target Name="IncrementVersionAndRebuildAddin" BeforeTargets="BeforeBuild" Condition="'$(Configuration)' == 'Release'">
+    <PropertyGroup>
+      <MSBuildPath>C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin\MSBuild.exe</MSBuildPath>
+      <KleiKodeshProject>$(SolutionDir)KleiKodesh\KleiKodesh.csproj</KleiKodeshProject>
+    </PropertyGroup>
+    <!-- Increment version -->
+    <Exec Command="powershell -ExecutionPolicy Bypass -File &quot;$(SolutionDir)IncrementVersion.ps1&quot; -SolutionDir &quot;$(SolutionDir)&quot;" />
+    <!-- Rebuild KleiKodesh in Release mode -->
+    <Exec Command="&quot;$(MSBuildPath)&quot; &quot;$(KleiKodeshProject)&quot; /t:Rebuild /p:Configuration=Release /nologo" />
+  </Target>
   <Target Name="ZipExternalReleaseFolder" BeforeTargets="BeforeBuild">
     <PropertyGroup>
       <!-- Source: the output of the other project -->

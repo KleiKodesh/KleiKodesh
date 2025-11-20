@@ -33,7 +33,7 @@ namespace KleiKodesh.Helpers
 
                 IntPtr wordWindowHandle = IntPtr.Zero;
 
-                var activeWindow = Globals.ThisAddIn.Application.ActiveWindow;
+                Microsoft.Office.Interop.Word.Window activeWindow = Globals.ThisAddIn.Application.ActiveWindow;
                 wordWindowHandle = new IntPtr(activeWindow.Hwnd);
 
                 WindowInteropHelper helper = new WindowInteropHelper(window);

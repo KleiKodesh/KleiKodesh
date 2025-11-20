@@ -43,8 +43,9 @@ namespace KleiKodesh.Ribbon
 
         void LoadSettings()
         {
+            string version = "v1.8.4";
             LocaleDictionary.UseOfficeLocale(Globals.ThisAddIn.Application, AppDomain.CurrentDomain.BaseDirectory);
-            UpdateHelper.Update("KleiKodesh", "KleiKodesh", "v1.8.1", 1, "נמצאו עדכונים עבור כלי קודש בוורד, האם ברצונך להורידם כעת?");
+            UpdateHelper.Update("KleiKodesh", "KleiKodesh", version, 1, "נמצאו עדכונים עבור כלי קודש בוורד, האם ברצונך להורידם כעת?");
             Oztarnik.Helpers.WdWpfWindowHelper.Application = Globals.ThisAddIn.Application;
         }
 
